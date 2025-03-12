@@ -17,7 +17,7 @@ public class OrderTriggerHandler {
         List<orderItem> orderItem = [SELECT Id, OrderId, Product2Id,  Quantity FROM OrderItem WHERE OrderId IN :orderIds];
         
         Set<Id> productIds = new Set<Id>();
-        for (OrderItem item : orderItems) {
+        for (OrderItem item : orderItem) {
             productIds.add(item.Product2Id);
         }
 
