@@ -21,7 +21,7 @@ public class OrderTriggerHandler {
             productIds.add(item.Product2Id);
         }
 
-        List<Inventory__c> inventoryList = [SELECT Id, Product__c, Available_Quantity__c FROM Inventory__c WHERE Product__c IN :productIds];
+        List<Inventory__c> inventoryList = [SELECT Id, Product__c, Stock_Quantity__c FROM Inventory__c WHERE Product__c IN :productIds];
 
         for (Inventory__c inv : inventoryList) {
             inventoryMap.put(inv.Product__c, inv);
