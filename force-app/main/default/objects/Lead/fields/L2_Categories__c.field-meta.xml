@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>L2_Categories__c</fullName>
+    <label>L2 Categories</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>L1_Categories__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>L2</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Mass Market</controllingFieldValue>
+            <valueName>Walmart</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mass Market</controllingFieldValue>
+            <valueName>Target</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mass Market</controllingFieldValue>
+            <valueName>Costco</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributors</controllingFieldValue>
+            <valueName>US</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributors</controllingFieldValue>
+            <valueName>Europe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributors</controllingFieldValue>
+            <valueName>South America</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Brokers</controllingFieldValue>
+            <controllingFieldValue>Manufacturer Reps</controllingFieldValue>
+            <valueName>TBD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Platforms</controllingFieldValue>
+            <valueName>Amazon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Platforms</controllingFieldValue>
+            <valueName>Wayfair</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Platforms</controllingFieldValue>
+            <valueName>Alibaba</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>
