@@ -52,11 +52,7 @@ public class OpportunityContractTriggerHandler {
             // Check if the Opportunity stage has changed to 'Closed Won'
             if (opp.StageName == 'Closed Won' && (oldOpp == null || oldOpp.StageName != 'Closed Won')) {
                 Opportunity optest = oppMap.get(opp.Id);
-                if(optest.Account.BillingCity == null || optest.Account.BillingStreet == null|| optest.Account.BillingState == null||
-                optest.Account.BillingPostalCode == null|| optest.Account.BillingCountry == null){
-                    opp.addError('Billing Address cannot be empty');
-                    return;
-                }
+               
                 if (oppContracts.containsKey(opp.Id) && oppContracts.get(opp.Id) != null ||
                 oppOrders.containsKey(opp.Id) && oppOrders.get(opp.Id) != null) {
                     System.debug('Contract or Order already present for the opportunity');
