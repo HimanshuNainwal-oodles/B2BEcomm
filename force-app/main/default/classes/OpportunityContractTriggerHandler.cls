@@ -21,7 +21,7 @@ public class OpportunityContractTriggerHandler {
              Account.BillingPostalCode, Account.BillingCountry, Account.ShippingStreet, Account.ShippingCity, Account.ShippingState,
              Account.ShippingPostalCode, Account.ShippingCountry
              FROM Opportunity WHERE Id IN :oppIds]
-        );
+            );
         
         List<Contract> allContracts = [SELECT Id, Opportunity__c FROM Contract WHERE Opportunity__c IN :oppIds];
         List<Order> allOrders = [SELECT Id, OpportunityId FROM Order WHERE OpportunityId IN :oppIds];
@@ -33,14 +33,14 @@ public class OpportunityContractTriggerHandler {
             if (!oppContracts.containsKey(c.Opportunity__c)) {
                 oppContracts.put(c.Opportunity__c, new Contract());
             }
-           // oppContracts.get(c.Opportunity__c).add(c);
+            // oppContracts.get(c.Opportunity__c).add(c);
         }
         
         for (Order o : allOrders) {
             if (!oppOrders.containsKey(o.OpportunityId)) {
                 oppOrders.put(o.OpportunityId, new Order());
             }
-           // oppOrders.get(o.OpportunityId).add(o);
+            // oppOrders.get(o.OpportunityId).add(o);
         }
         
         List<Contract> contractsToInsert = new List<Contract>();
@@ -51,12 +51,17 @@ public class OpportunityContractTriggerHandler {
             
             // Check if the Opportunity stage has changed to 'Closed Won'
             if (opp.StageName == 'Closed Won' && (oldOpp == null || oldOpp.StageName != 'Closed Won')) {
-                
+                Opportunity optest = oppMap.get(opp.Id);
+                if(optest.Account.BillingCity == null || optest.Account.BillingStreet == null|| optest.Account.BillingState == null||
+                optest.Account.BillingPostalCode == null|| optest.Account.BillingCountry == null){
+                    opp.addError('Billing Address cannot be empty');
+                    return;
+                }
                 if (oppContracts.containsKey(opp.Id) && oppContracts.get(opp.Id) != null ||
-                    oppOrders.containsKey(opp.Id) && oppOrders.get(opp.Id) != null) {
-                        System.debug('Contract or Order already present for the opportunity');
-                        continue;
-                    }
+                oppOrders.containsKey(opp.Id) && oppOrders.get(opp.Id) != null) {
+                    System.debug('Contract or Order already present for the opportunity');
+                    continue;
+                }
                 
                 Opportunity op = oppMap.get(opp.Id);
                 
@@ -70,7 +75,7 @@ public class OpportunityContractTriggerHandler {
         }
         
         for (Contract c : contractsToInsert) {
-            Opportunity op = oppMap.get(c.Opportunity__c); 
+            Opportunity op = oppMap.get(c.Opportunity__c);
             
             OrderHelper order = new OrderHelper(op, c);
             ordersToInsert.add(order.getOrderRecord());
@@ -80,5 +85,5 @@ public class OpportunityContractTriggerHandler {
             insert ordersToInsert;
         }
         
-          }
+    }
 }
